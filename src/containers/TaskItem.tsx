@@ -4,12 +4,14 @@ import { useDispatch } from 'react-redux';
 
 import { ITaskItemProps } from '../helpers/app.interfaces';
 import { deleteTask, toggleTaskDone } from '../redux/todoSlice';
+import { addSubtask } from '../redux/todoSlice';
 import SubTaskItem from './SubTaskItem';
 
 const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskItemProps) => {
   const dispatch = useDispatch();
 
-  const [addSubTask, setAddSubTask] = useState(false);
+  const [addSubTaskState, setAddSubTaskState] = useState(false);
+  const [subTaskText, setSubTaskText] = useState('');
 
   const [{ isDragging }, drag] = useDrag({
     type: 'TODO',
@@ -30,6 +32,25 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
     },
   });
 
+  const handleSubtaskTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSubTaskText(event.target.value);
+  };
+
+  const handleSubmit = () => {
+    if (subTaskText.trim() !== '') {
+      const newSubtask = {
+        id: 0,
+        content: subTaskText,
+        isDone: false,
+      };
+
+      dispatch(addSubtask({ taskId: idTask, subtask: newSubtask }));
+
+      setAddSubTaskState(false);
+      setSubTaskText('');
+    }
+  };
+
   const handleDeleteTask = () => {
     dispatch(deleteTask(idTask));
   };
@@ -39,7 +60,7 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
   };
 
   const handleAddSubTaskClick = () => {
-    setAddSubTask(!addSubTask);
+    setAddSubTaskState(!addSubTaskState);
   };
 
   const backgroundColor = isDragging ? '#F3F4F6' : '#ffffff';
@@ -73,7 +94,7 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
             strokeWidth="2"
             stroke="currentColor"
             className={`w-6 h-6 text-gray-500 hover:text-blue-500 hover:fill-blue-100 ${
-              addSubTask && 'text-blue-500 fill-blue-100'
+              addSubTaskState && 'text-blue-600 fill-blue-100'
             } cursor-pointer`}
           >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -103,7 +124,7 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
             strokeWidth="2"
             stroke="currentColor"
             className={`w-6 h-6 text-gray-500 hover:text-green-500 hover:fill-green-100 ${
-              isDone && 'text-green-500 fill-green-100'
+              isDone && 'text-green-600 fill-green-100'
             } cursor-pointer`}
           >
             <path
@@ -121,23 +142,27 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
 
       {subtasks &&
         subtasks.length > 0 &&
-        subtasks.map(({ id, content }, index) => (
-          <SubTaskItem key={id} idTask={idTask} idSubTask={id} content={content} index={index} />
+        subtasks.map(({ id, content, isDone }, index) => (
+          <SubTaskItem key={id} idTask={idTask} idSubTask={id} content={content} isDone={isDone} index={index} />
         ))}
 
-      {addSubTask && (
+      {addSubTaskState && (
         <div className={`py-3`}>
-          <div className={`flex`}>
+          <form className={`flex`} onSubmit={handleSubmit}>
             <input
+              type="text"
               className={`appearance-none border rounded w-full py-2 px-2 mr-4 text-grey-darker"
                   placeholder="Add New SubTask...`}
+              value={subTaskText}
+              onChange={handleSubtaskTextChange}
             />
             <button
+              type="submit"
               className={`flex-no-shrink p-2 border-2 rounded text-blue-500 border-blue-500 hover:text-white hover:bg-blue-500`}
             >
               Add
             </button>
-          </div>
+          </form>
         </div>
       )}
     </div>

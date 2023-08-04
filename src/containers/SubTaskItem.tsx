@@ -1,9 +1,17 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { deleteSubtask } from '../redux/todoSlice';
 import { ISubTaskItemProps } from '../helpers/app.interfaces';
 
 const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItemProps) => {
+  const dispatch = useDispatch();
+
   const [isCompleted, setIsCompleted] = useState(false);
+
+  const handleDeleteSubtask = () => {
+    dispatch(deleteSubtask({ taskId: idTask, subtaskId: idSubTask }));
+  };
 
   const handleCompletedClick = () => {
     setIsCompleted(!isCompleted);
@@ -11,7 +19,7 @@ const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItem
 
   return (
     <div className={`w-full flex py-3 items-center`}>
-      <div>
+      <div onClick={handleDeleteSubtask}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -35,7 +43,7 @@ const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItem
           strokeWidth="2"
           stroke="currentColor"
           className={`w-6 h-6 text-gray-500 hover:text-green-500 hover:fill-green-100 ${
-            isCompleted && 'text-green-500 fill-green-100'
+            isCompleted && 'text-green-600 fill-green-100'
           } cursor-pointer`}
         >
           <path

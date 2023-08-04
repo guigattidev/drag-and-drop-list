@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,20 +12,20 @@ function ToDo() {
   const todos = useSelector((state: RootState) => state.todo.todos);
   const dispatch = useDispatch();
 
-  const [todoText, setTodoText] = useState('');
+  const [taskText, setTaskText] = useState('');
 
-  const handleAddTodo = () => {
+  const handleAddTask = () => {
     const uniqueIdValue = uniqueId();
 
-    if (todoText.trim() !== '') {
+    if (taskText.trim() !== '') {
       dispatch(
         addTask({
-          id: Number(uniqueIdValue),
-          content: todoText,
+          id: Number(uniqueIdValue) + 4,
+          content: taskText,
           isDone: false,
         }),
       );
-      setTodoText('');
+      setTaskText('');
     }
   };
 
@@ -50,12 +50,13 @@ function ToDo() {
                 type="text"
                 className={`appearance-none border rounded w-full py-2 px-2 mr-4 text-grey-darker`}
                 placeholder="Add New Task..."
-                value={todoText}
-                onChange={(e) => setTodoText(e.target.value)}
+                value={taskText}
+                onChange={(e) => setTaskText(e.target.value)}
               />
               <button
+                type="submit"
                 className={`flex-no-shrink p-2 border-2 rounded text-green-500 border-green-500 hover:text-white hover:bg-green-500`}
-                onClick={handleAddTodo}
+                onClick={handleAddTask}
               >
                 Add
               </button>

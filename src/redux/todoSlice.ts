@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ITodoState } from '../helpers/app.interfaces';
+import { ISubtask, ITask, ITodoState } from '../helpers/app.interfaces';
 
 const initialState: ITodoState = {
   todos: [
@@ -19,14 +19,14 @@ const initialState: ITodoState = {
   ],
 };
 
-export const counterSlice = createSlice({
+export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    setTodo: (state, action: PayloadAction<Task>) => {
+    setTodo: (state, action: PayloadAction<ITask[]>) => {
       state.todos = action.payload;
     },
-    addTask: (state, action: PayloadAction<Task>) => {
+    addTask: (state, action: PayloadAction<ITask>) => {
       state.todos.push(action.payload);
     },
     deleteTask: (state, action: PayloadAction<number>) => {
@@ -39,19 +39,34 @@ export const counterSlice = createSlice({
         task.isDone = !task.isDone;
       }
     },
-    addSubtask: (state, action: PayloadAction<{ taskId: number; subtask: Subtask }>) => {
+    addSubtask: (state, action: PayloadAction<{ taskId: number; subtask: ISubtask }>) => {
       const task = state.todos.find((task) => task.id === action.payload.taskId);
 
       if (task) {
         if (!task.subtasks) {
           task.subtasks = [];
         }
+        action.payload.subtask.id = task.subtasks.length + 1;
+
         task.subtasks.push(action.payload.subtask);
+      }
+    },
+    deleteSubtask: (state, action: PayloadAction<{ taskId: number; subtaskId: number }>) => {
+      const { taskId, subtaskId } = action.payload;
+
+      const task = state.todos.find((task) => task.id === taskId);
+
+      if (task && task.subtasks) {
+        task.subtasks = task.subtasks.filter((subtask) => subtask.id !== subtaskId);
+
+        for (let i = 0; i < task.subtasks.length; i++) {
+          task.subtasks[i].id = i + 1;
+        }
       }
     },
   },
 });
 
-export const { setTodo, deleteTask, addTask, toggleTaskDone } = counterSlice.actions;
+export const { setTodo, deleteTask, addTask, toggleTaskDone, addSubtask, deleteSubtask } = todoSlice.actions;
 
-export default counterSlice.reducer;
+export default todoSlice.reducer;
