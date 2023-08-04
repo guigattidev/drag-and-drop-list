@@ -1,20 +1,17 @@
-import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { deleteSubtask } from '../redux/todoSlice';
+import { deleteSubtask, toggleSubtaskDone } from '../redux/todoSlice';
 import { ISubTaskItemProps } from '../helpers/app.interfaces';
 
-const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItemProps) => {
+const SubTaskItem = ({ idTask, idSubTask, content, isDone }: ISubTaskItemProps) => {
   const dispatch = useDispatch();
-
-  const [isCompleted, setIsCompleted] = useState(false);
 
   const handleDeleteSubtask = () => {
     dispatch(deleteSubtask({ taskId: idTask, subtaskId: idSubTask }));
   };
 
-  const handleCompletedClick = () => {
-    setIsCompleted(!isCompleted);
+  const handleToggleSubtaskDone = () => {
+    dispatch(toggleSubtaskDone({ taskId: idTask, subtaskId: idSubTask }));
   };
 
   return (
@@ -35,7 +32,7 @@ const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItem
           />
         </svg>
       </div>
-      <div onClick={handleCompletedClick}>
+      <div onClick={handleToggleSubtaskDone}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -43,7 +40,7 @@ const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItem
           strokeWidth="2"
           stroke="currentColor"
           className={`w-6 h-6 text-gray-500 hover:text-green-500 hover:fill-green-100 ${
-            isCompleted && 'text-green-600 fill-green-100'
+            isDone && 'text-green-600 fill-green-100'
           } cursor-pointer`}
         >
           <path
@@ -53,7 +50,7 @@ const SubTaskItem = ({ idTask, idSubTask, content, isDone, index }: ISubTaskItem
           />
         </svg>
       </div>
-      <p className={`ml-2 text-grey-darkest ${isCompleted && 'line-through'}`}>
+      <p className={`ml-2 text-grey-darkest ${isDone && 'line-through'}`}>
         <span className={`font-bold`}>{`Subtask ${idTask}.${idSubTask}: `}</span>
         {content}
       </p>

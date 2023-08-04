@@ -17,12 +17,20 @@ const initialState: ITodoState = {
     { id: 3, content: 'Li Europan lingues es membres del', isDone: false },
     { id: 4, content: 'The European languages are members of', isDone: false },
   ],
+  order: 'ascending',
 };
 
 export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
+    orderTodos: (state, action: PayloadAction<'ascending' | 'descending'>) => {
+      state.order = action.payload;
+      state.todos.sort((a, b) => {
+        const sortOrder = state.order === 'ascending' ? 1 : -1;
+        return sortOrder * (a.id - b.id);
+      });
+    },
     setTodo: (state, action: PayloadAction<ITask[]>) => {
       state.todos = action.payload;
     },
@@ -64,9 +72,29 @@ export const todoSlice = createSlice({
         }
       }
     },
+    toggleSubtaskDone: (state, action: PayloadAction<{ taskId: number; subtaskId: number }>) => {
+      const task = state.todos.find((task) => task.id === action.payload.taskId);
+
+      if (task && task.subtasks) {
+        const subtask = task.subtasks.find((subtask) => subtask.id === action.payload.subtaskId);
+
+        if (subtask) {
+          subtask.isDone = !subtask.isDone;
+        }
+      }
+    },
   },
 });
 
-export const { setTodo, deleteTask, addTask, toggleTaskDone, addSubtask, deleteSubtask } = todoSlice.actions;
+export const {
+  orderTodos,
+  setTodo,
+  deleteTask,
+  addTask,
+  toggleTaskDone,
+  addSubtask,
+  deleteSubtask,
+  toggleSubtaskDone,
+} = todoSlice.actions;
 
 export default todoSlice.reducer;

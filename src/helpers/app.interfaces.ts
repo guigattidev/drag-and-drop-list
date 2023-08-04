@@ -12,7 +12,7 @@ export interface ISubTaskItemProps {
   idSubTask: number;
   content?: string;
   isDone: boolean;
-  index: number;
+  index?: number;
 }
 
 export interface ISubtask {
@@ -30,4 +30,5 @@ export interface ITask {
 
 export interface ITodoState {
   todos: ITask[];
+  order: 'ascending' | 'descending';
 }

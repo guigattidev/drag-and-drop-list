@@ -142,8 +142,8 @@ const TaskItem = ({ idTask, content, isDone, subtasks, index, moveTodo }: ITaskI
 
       {subtasks &&
         subtasks.length > 0 &&
-        subtasks.map(({ id, content, isDone }, index) => (
-          <SubTaskItem key={id} idTask={idTask} idSubTask={id} content={content} isDone={isDone} index={index} />
+        subtasks.map(({ id, content, isDone }) => (
+          <SubTaskItem key={id} idTask={idTask} idSubTask={id} content={content} isDone={isDone} />
         ))}
 
       {addSubTaskState && (
