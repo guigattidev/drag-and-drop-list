@@ -1,5 +1,11 @@
 # Task Management Application (to-do list)
 
+## Instructions
+
+1. Use the command `npm i -f ` for install all dependencies
+2. Use the command `npm run test -u` for run the tests
+3. Use the command `npm run dev` for run the application
+
 ## Features
 
 1. Display Task List
@@ -17,7 +23,7 @@
 
 ## Tests
 
-- [] Write unit tests for the main scenarios.
+- [x] Write unit tests for the main scenarios.
 
 ## Test Evaluation
 

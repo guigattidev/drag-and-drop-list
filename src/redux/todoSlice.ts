@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ISubtask, ITask, ITodoState } from '../helpers/app.interfaces';
 
-const initialState: ITodoState = {
+export const initialState: ITodoState = {
   todos: [
     {
       id: 1,

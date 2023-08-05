@@ -4,7 +4,7 @@ export interface ITaskItemProps {
   isDone: boolean;
   addSubTask: boolean;
   subtasks?: any[];
-  index: number;
+  index?: number;
   moveTodo?: ((itemIndex: number | any, index: number) => void) | any;
 }
 
@@ -48,6 +48,6 @@ export interface IDoneIconProps {
 }
 export interface IDragDropProps {
   idTask: number;
-  index: number;
+  index?: number;
   moveTodo: ((itemIndex: number | any, index: number) => void) | any;
 }
