@@ -32,6 +32,7 @@
 
 ## Tests
 
+- [x] The resource does not exist
 - [x] Write unit tests for the main scenarios.
 
 ## Test Evaluation

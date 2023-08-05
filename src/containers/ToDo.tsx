@@ -26,18 +26,24 @@ function ToDo() {
         </div>
 
         <div className={`grid divide-y`}>
-          {todos.map(({ id, content, isDone, addSubTask, subtasks }, index) => (
-            <TaskItem
-              key={id}
-              idTask={id}
-              content={content}
-              isDone={isDone}
-              addSubTask={addSubTask}
-              subtasks={subtasks}
-              index={index}
-              moveTodo={moveTodo}
-            />
-          ))}
+          {todos && todos.length > 0 ? (
+            todos.map(({ id, content, isDone, addSubTask, subtasks }, index) => (
+              <TaskItem
+                key={id}
+                idTask={id}
+                content={content}
+                isDone={isDone}
+                addSubTask={addSubTask}
+                subtasks={subtasks}
+                index={index}
+                moveTodo={moveTodo}
+              />
+            ))
+          ) : (
+            <div className={`w-full flex py-4 items-center`}>
+              <p className={`ml-2 text-grey-darkest `}>Empty list</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
