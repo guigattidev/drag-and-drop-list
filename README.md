@@ -2,18 +2,27 @@
 
 ## Instructions
 
+### Npm
+
 1. Use the command `npm i -f ` for install all dependencies
 2. Use the command `npm run test -u` for run the tests
 3. Use the command `npm run dev` for run the application
+4. Access in the browser the url `http://localhost:8080`
+
+### Docker
+
+1. Use the command `docker build -t react-app .` to build the docker image
+2. Use the command `docker run -d --rm -p 8080:8080 --name react-app-docker react-app` to run the docker container
+3. Access in the browser the url `http://localhost:8080`
 
 ## Features
 
-1. Display Task List
-2. Add New Task
-3. Add Subtask
-4. Mark Task as Completed
-5. Delete Task
-6. Order Tasks
+1. [x] Display Task List
+2. [x] Add New Task
+3. [x] Add Subtask
+4. [x] Mark Task as Completed
+5. [x] Delete Task
+6. [x] Order Tasks
 
 ## Functionalities
 
@@ -35,11 +44,9 @@
 ## Mandatory
 
 - [x] A readme is required. If we don’t have a readme, this test will be ignored.
-- [] A video or a URL that shows the project is working. You can upload and share with a public link and send us the link.
+- [x] A video or a URL that shows the project is working. You can upload and share with a public link and send us the link.
 
 ## Bonus Points
 
-- [] If the project is published online, a 20% bonus will be given.
-- [] If the project is delivered using Docker, a 10% bonus will be given on this task.
-
-Send the link of google docs with: code, video and url of host.
+- [x] If the project is published online, a 20% bonus will be given.
+- [x] If the project is delivered using Docker, a 10% bonus will be given on this task.
