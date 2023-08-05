@@ -7,15 +7,16 @@ const initialState: ITodoState = {
       id: 1,
       content: 'Lorem ipsum dolor sit amet, consectetuer',
       isDone: false,
+      addSubTask: false,
       subtasks: [
         { id: 1, content: 'Far far away, behind the word', isDone: false },
         { id: 2, content: 'A wonderful serenity has taken possession', isDone: false },
         { id: 3, content: 'One morning, when Gregor Samsa woke', isDone: false },
       ],
     },
-    { id: 2, content: 'Sed ut perspiciatis unde omnis iste', isDone: false },
-    { id: 3, content: 'Li Europan lingues es membres del', isDone: false },
-    { id: 4, content: 'The European languages are members of', isDone: false },
+    { id: 2, content: 'Sed ut perspiciatis unde omnis iste', isDone: false, addSubTask: false },
+    { id: 3, content: 'Li Europan lingues es membres del', isDone: false, addSubTask: false },
+    { id: 4, content: 'The European languages are members of', isDone: false, addSubTask: false },
   ],
   order: 'ascending',
 };
@@ -45,6 +46,15 @@ export const todoSlice = createSlice({
 
       if (task) {
         task.isDone = !task.isDone;
+      }
+    },
+    toggleAddSubtaskMode: (state, action: PayloadAction<number>) => {
+      const taskId = action.payload;
+
+      const task = state.todos.find((task) => task.id === taskId);
+
+      if (task) {
+        task.addSubTask = !task.addSubTask;
       }
     },
     addSubtask: (state, action: PayloadAction<{ taskId: number; subtask: ISubtask }>) => {
@@ -92,6 +102,7 @@ export const {
   deleteTask,
   addTask,
   toggleTaskDone,
+  toggleAddSubtaskMode,
   addSubtask,
   deleteSubtask,
   toggleSubtaskDone,

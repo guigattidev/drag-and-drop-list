@@ -1,27 +1,39 @@
-# React + TypeScript + Vite
+# Task Management Application (to-do list)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Features
 
-Currently, two official plugins are available:
+1. Display Task List
+2. Add New Task
+3. Add Subtask
+4. Mark Task as Completed
+5. Delete Task
+6. Order Tasks
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Functionalities
 
-## Expanding the ESLint configuration
+- [x] The application should have a responsive and visually appealing layout, adapting to different screen sizes and devices.
+- [x] Utilize UI/UX design principles to create an intuitive and user-friendly interface.
+- [x] Organize the codebase using modular and readable code, following frontend development best practices.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tests
 
-- Configure the top-level `parserOptions` property like this:
+- [] Write unit tests for the main scenarios.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+## Test Evaluation
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+- [x] Is the solution correct and functional?
+- [x] Is the code well-structured, following frontend development best practices?
+- [x] Does the layout of the application meet UI/UX design principles and provide a visually appealing experience?
+- [x] Does the code adhere to the conventions and standards of the chosen programming language?
+
+## Mandatory
+
+- [x] A readme is required. If we don’t have a readme, this test will be ignored.
+- [] A video or a URL that shows the project is working. You can upload and share with a public link and send us the link.
+
+## Bonus Points
+
+- [] If the project is published online, a 20% bonus will be given.
+- [] If the project is delivered using Docker, a 10% bonus will be given on this task.
+
+Send the link of google docs with: code, video and url of host.
