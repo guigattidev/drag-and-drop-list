@@ -1,5 +1,7 @@
 # Task Management Application (to-do list)
 
+![alt text](https://imgur.com/jDgjvXw)
+
 ## Instructions
 
 ### Npm
