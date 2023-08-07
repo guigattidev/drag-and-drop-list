@@ -1,6 +1,6 @@
 # Task Management Application (to-do list)
 
-![App]([https://myoctocat.com/assets/images/base-octocat.svg](https://i.imgur.com/jDgjvXw.png))
+![App](https://i.imgur.com/jDgjvXw.png)
 
 ## Instructions
 
